@@ -72,7 +72,6 @@ DetectHiddenWindows, On
 CoordMode, Mouse, Screen
 
 TimerValue = 120
-TimerCountDown = 0
 AlarmTime =
 AlarmTime += TimerValue, minutes
 
@@ -83,7 +82,9 @@ wincolumn = 0
 message = 
 size = 36
 TargetWidth = 0
-correction = 0.2
+correction = 0
+TimeCountdown = 0
+TopCountdown = 0
 
 SysGet, Mon1, Monitor, 1
 SysGet, Mon2, Monitor, 2
@@ -96,7 +97,6 @@ IF Mon2Right > 0
 	winposition := Mon2Bottom - height
 }else
 {
-	correction := 0
 	TargetWidth := Mon1Right - Mon1Left
 	TargetWidth := TargetWidth - (TargetWidth * correction)
 	wincolumn := Mon1Left
@@ -130,7 +130,6 @@ SetTimer, process, 1000
 return 
 
 process:
-	WinSet, Top,,ahk_id %guiid%
 	If remaining > 0 
 	{
 		remaining := remaining - 1
@@ -150,14 +149,23 @@ process:
 	}
 	FormatTime, TimeString, , h:mm
 	GuiControl, , ProgressClock, %TimeString%
-	If TimerCountDown > 0
+	If TimeCountdown > 0
 	{
-		TimerCountDown := TimerCountDown - 1
+		TimeCountdown := TimeCountdown - 1
 	}
 	Else
 	{
-		GuiControl, , ProgressLabel, 		
-		TimerCountDown := 0
+		TimeCountdown := 0
+		GuiControl, , ProgressLabel,
+	}
+	If TopCountdown > 0
+	{
+		TopCountdown := TopCountdown - 1
+	}
+	Else
+	{
+		TopCountdown := 30
+		WinSet, Top,,ahk_id %guiid%
 	}
 return
 
@@ -285,7 +293,7 @@ return
 MessageValue = 
 InputBox, MessageValue, Message Value, The Message to show:
 GuiControl, , ProgressLabel, %MessageValue%
-TimerCountDown := 10
+TimeCountdown := 30
 return
 
 ^!q::
