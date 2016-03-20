@@ -171,32 +171,32 @@ return
 
 
 ^!i::
-winposition := winposition - 100
+winposition := winposition - 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
 ^!k::
-winposition := winposition + 100
+winposition := winposition + 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
 ^!j::
-wincolumn := wincolumn - 100
+wincolumn := wincolumn - 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
 ^!l::
-wincolumn := wincolumn + 100
+wincolumn := wincolumn + 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
 ^!p::
-winposition := winposition + 50
+winposition := winposition + 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
 ^!o::
-winposition := winposition - 50
+winposition := winposition - 25
 WinMove, ahk_id %guiid%, , %wincolumn%, %winposition%
 return
 
